@@ -1,0 +1,45 @@
+/* Font */
+@import url("#FONT_URL");
+
+body,
+#root,
+label {
+  font-family: #FONT_NAME !important;
+}
+
+/* Colors & BG */
+.color-custom {
+  color: #COLOR !important;
+}
+
+.bg-custom {
+  background-color: #BG;
+}
+
+/* Button */
+.btn-custom {
+  color: #BTN_COLOR !important;
+  background: #BTN_BG !important;
+}
+
+.btn-custom:hover {
+  color: #BTN_BG !important;
+  background: #BTN_COLOR !important;
+  border: 1px solid #BTN_BG !important;
+}
+
+/* Sidebar */
+.sidebar-title div,
+.sidebar-title div > a,
+.sidebar-menu a,
+.sidebar-menu a::before {
+  color: #SIDEBAR_COLOR !important;
+}
+
+.sidebar-menu a:hover::before {
+  border-bottom: 2px solid #SIDEBAR_COLOR;
+}
+
+.bg-custom-sidebar {
+  background-color: #SIDEBAR_BG !important;
+}

@@ -1,0 +1,45 @@
+/* Font */
+@import url("https://fonts.cdnfonts.com/css/uni-neue");
+
+body,
+#root,
+label {
+  font-family: Uni Neue !important;
+}
+
+/* Colors & BG */
+.color-custom {
+  color: #64a0fa !important;
+}
+
+.bg-custom {
+  background-color: #64a0fa;
+}
+
+/* Button */
+.btn-custom {
+  color: #ffffff !important;
+  background: #64a0fa !important;
+}
+
+.btn-custom:hover {
+  color: #64a0fa !important;
+  background: #ffffff !important;
+  border: 1px solid #64a0fa !important;
+}
+
+/* Sidebar */
+.sidebar-title div,
+.sidebar-title div > a,
+.sidebar-menu a,
+.sidebar-menu a::before {
+  color: #ffffff !important;
+}
+
+.sidebar-menu a:hover::before {
+  border-bottom: 2px solid #ffffff;
+}
+
+.bg-custom-sidebar {
+  background-color: #64a0fa !important;
+}
