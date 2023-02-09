@@ -93,6 +93,8 @@ const Default = () => {
   const notes = useRef();
 
   useEffect(() => {
+    setLoading(true);
+
     var phoneNumber = window.location.search.substring(
       window.location.search.indexOf("snmbr=") + 6,
       window.location.search.indexOf("&")
@@ -100,7 +102,7 @@ const Default = () => {
     var batchId = window.location.search.substring(
       window.location.search.indexOf("batchId=") + 8
     );
-
+    
     if (!validatePhoneNumber(phoneNumber))
       navigate("/error", {
         state: {
@@ -120,11 +122,10 @@ const Default = () => {
 
       getUserInfo({ ID: id, BatchId: batchId }, setConnFailed).then((res) => {
         if (res) setShowDeviceInfo(true);
+        setLoading(false);
       });
     });
-  });
 
-  useEffect(() => {
     let info = {
       UserAgent: navigator.userAgent,
       Resolution:
@@ -137,7 +138,6 @@ const Default = () => {
 
     getDeviceInfo(info, setConnFailed).then((res) => {
       setUserInfo(res);
-      setLoading(false);
 
       if (res.device.deviceType === "desktop")
         navigate("/error", {

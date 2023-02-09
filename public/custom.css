@@ -13,19 +13,19 @@ label {
 }
 
 .bg-custom {
-  background-color: #ff0004;
+  background-color: #6395d7;
 }
 
 /* Button */
 .btn-custom {
   color: #ffffff !important;
-  background: #ff0004 !important;
+  background: #6395d7 !important;
 }
 
 .btn-custom:hover {
-  color: #ff0004 !important;
+  color: #6395d7 !important;
   background: #ffffff !important;
-  border: 1px solid #ff0004 !important;
+  border: 1px solid #6395d7 !important;
 }
 
 /* Sidebar */
@@ -41,5 +41,5 @@ label {
 }
 
 .bg-custom-sidebar {
-  background-color: #ff0004 !important;
+  background-color: #6395d7 !important;
 }
