@@ -105,29 +105,6 @@ const SmsService = ({ token }) => {
 
   return (
     <div className="px-3 px-sm-5 py-2">
-      <div className="pt-2 d-flex flex-wrap align-items-start">
-        <DefaultButton
-          className="btn-custom"
-          text={t("Save")}
-          type="submit"
-          iconProps={{ iconName: "Save" }}
-        />
-      </div>
-      {showMessage && (
-        <MessageBar
-          className="my-3"
-          delayedRender={false}
-          messageBarType={messageType}
-          isMultiline={false}
-          dismissButtonAriaLabel={t("Close")}
-          dismissIconProps={{ iconName: "ChromeClose" }}
-          onDismiss={() => {
-            toggleShowMessage();
-          }}
-        >
-          {message}
-        </MessageBar>
-      )}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -145,11 +122,35 @@ const SmsService = ({ token }) => {
           saveSettings(token, settings, setConnFailed).then((res) => {
             setFormState("unchanged");
             if (res)
-              setMessageVariables(t("Success_save"), MessageBarType.success);
-            else setMessageVariables(t("Error_save"), MessageBarType.error);
+              setMessageVariables(t("Save_success"), MessageBarType.success);
+            else setMessageVariables(t("Save_error"), MessageBarType.error);
           });
         }}
       >
+        <div className="pt-2 d-flex flex-wrap align-items-start">
+          <DefaultButton
+            className="btn-custom"
+            text={t("Save")}
+            type="submit"
+            iconProps={{ iconName: "Save" }}
+          />
+        </div>
+        {showMessage && (
+          <MessageBar
+            className="my-3"
+            delayedRender={false}
+            messageBarType={messageType}
+            isMultiline={false}
+            dismissButtonAriaLabel={t("Close")}
+            dismissIconProps={{ iconName: "ChromeClose" }}
+            onDismiss={() => {
+              toggleShowMessage();
+            }}
+          >
+            {message}
+          </MessageBar>
+        )}
+
         <div className="my-3">
           <TextField
             label={t("Site_url")}
