@@ -12,10 +12,10 @@ import Font from "../components/utility/brand-identity/Font.js";
 import Image from "../components/utility/brand-identity/Image.js";
 import { useTranslation } from "react-i18next";
 
-import api_url from "../configurations/apiConfig.json";
+import API from "../configurations/apiConfig.json";
 
 const getSettings = async (token, setConnFailed) => {
-  return fetch(api_url.API_URL + "/brand/get-settings", {
+  return fetch(API.BASE_URL + "/brand/get-settings", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const getSettings = async (token, setConnFailed) => {
 };
 
 const saveSettings = async (token, body, setConnFailed) => {
-  return fetch(api_url.API_URL + "/brand/save-settings", {
+  return fetch(API.BASE_URL + "/brand/save-settings", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const saveSettings = async (token, body, setConnFailed) => {
 };
 
 const updateImage = async (token, body, setConnFailed) => {
-  fetch(api_url.API_URL + "/brand/update-image", {
+  fetch(API.BASE_URL + "/brand/update-image", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -206,9 +206,10 @@ const BrandIdentity = ({ token }) => {
           };
           saveSettings(token, settings, setConnFailed).then((res) => {
             setFormState("unchanged");
-            if (res)
+            console.log(res);
+            if (res.success) {
               setMessageVariables(t("Success_save"), MessageBarType.success);
-            else setMessageVariables(t("Error_save"), MessageBarType.error);
+            } else setMessageVariables(t("Error_save"), MessageBarType.error);
           });
 
           if (logoSrc !== "")

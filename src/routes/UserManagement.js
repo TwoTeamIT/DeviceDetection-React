@@ -15,10 +15,10 @@ import {
 import { useBoolean } from "@fluentui/react-hooks";
 import { useTranslation } from "react-i18next";
 
-import api_url from "../configurations/apiConfig.json";
+import API from "../configurations/apiConfig.json";
 
 const loadUsers = async (token, setConnFailed) => {
-  return fetch(api_url.API_URL + "/user/all", {
+  return fetch(API.BASE_URL + "/user/all", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const loadUsers = async (token, setConnFailed) => {
 };
 
 const createUser = async (token, body, setConnFailed) => {
-  return fetch(api_url.API_URL + "/user/add", {
+  return fetch(API.BASE_URL + "/user/add", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const createUser = async (token, body, setConnFailed) => {
 };
 
 const updateUser = async (token, body, setConnFailed) => {
-  return fetch(api_url.API_URL + "/user/update", {
+  return fetch(API.BASE_URL + "/user/update", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const updateUser = async (token, body, setConnFailed) => {
 };
 
 const deleteUser = async (token, body, setConnFailed) => {
-  return fetch(api_url.API_URL + "/user/delete", {
+  return fetch(API.BASE_URL + "/user/delete", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const UserManagement = ({ token }) => {
     useBoolean(false);
   const [panelTitle, setPanelTitle] = useState("");
   const [items, setItems] = useState([]);
-  const [allItems, setAllItems] = useState([]);
+  //const [allItems, setAllItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [usernameField, setUsername] = useState("");
   const [passwordField, setPassword] = useState("");
@@ -110,7 +110,7 @@ const UserManagement = ({ token }) => {
 
   const columns = [
     /*{
-      key: "1",
+      key: "id",
       name: "ID",
       fieldName: "id",
       minWidth: 100,
@@ -118,7 +118,7 @@ const UserManagement = ({ token }) => {
       isResizable: true,
     },*/
     {
-      key: "2",
+      key: "username",
       name: t("Username"),
       fieldName: "userName",
       minWidth: 100,
@@ -126,7 +126,7 @@ const UserManagement = ({ token }) => {
       isResizable: true,
     },
     {
-      key: "3",
+      key: "type",
       name: t("Role"),
       fieldName: "type",
       minWidth: 100,
@@ -134,7 +134,7 @@ const UserManagement = ({ token }) => {
       isResizable: true,
     },
     {
-      key: "4",
+      key: "enabled",
       name: t("Enabled"),
       fieldName: "enabled",
       minWidth: 55,
@@ -144,7 +144,6 @@ const UserManagement = ({ token }) => {
   ];
 
   useEffect(() => {
-    if (token)
       (async () => {
         loadUsers(token, setConnFailed).then((users) => {
           users.forEach((e) => {
@@ -154,7 +153,7 @@ const UserManagement = ({ token }) => {
                 e.isEnabled.toString().slice(1)
             );
           });
-          setAllItems(users);
+          //setAllItems(users);
           setItems(users);
         });
       })();
@@ -168,7 +167,7 @@ const UserManagement = ({ token }) => {
     setError("");
   };
 
-  const setResult = (res) => {
+  const setResult = (res, error) => {
     if (res) {
       dismissPanel();
       toggleShowMessage();
@@ -178,7 +177,7 @@ const UserManagement = ({ token }) => {
         toggleShowMessage();
       }, 2000);
     } else {
-      setError(t("Save_error"));
+      setError(error);
     }
   };
 
@@ -194,11 +193,11 @@ const UserManagement = ({ token }) => {
 
     if (user.id === 0)
       createUser(token, user, setConnFailed).then((res) => {
-        setResult(res);
+        setResult(res, t("Save_error"));
       });
     else
       updateUser(token, user, setConnFailed).then((res) => {
-        setResult(res);
+        setResult(res, t("Save_error"));
       });
   };
 
@@ -212,19 +211,21 @@ const UserManagement = ({ token }) => {
   return (
     <div className="px-3 px-sm-5 py-2">
       <div className="py-2 d-flex flex-wrap align-items-start">
+        {/*
         <SearchBox
           className="me-2 my-1"
           placeholder={t("Search")}
           onChange={(e, text) => {
             text
               ? setItems(
-                  items.filter(
-                    (i) => i.userName.toLowerCase().indexOf(text) > -1
+                items.filter(
+                  (i) => i.userName.toLowerCase().indexOf(text) > -1
                   )
                 )
               : setItems(allItems);
           }}
         />
+                  */}
         <DefaultButton
           className="btn-custom my-1"
           text={t("Add_new_user")}
@@ -324,6 +325,7 @@ const UserManagement = ({ token }) => {
         )}
         <DetailsList
           items={items}
+          setKey="username"
           columns={columns}
           selection={selection}
           selectionMode={SelectionMode.single}
@@ -332,7 +334,6 @@ const UserManagement = ({ token }) => {
               <DetailsRow
                 {...props}
                 onClick={() => {
-                  console.log(props);
                   setPanelTitle(t("Edit_user"));
                   setSelectedItem(props.item);
                   setUsername(props.item.userName);

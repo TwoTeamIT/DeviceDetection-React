@@ -4,13 +4,14 @@ import { initializeIcons } from "@fluentui/react/lib/Icons";
 import "./i18nextConf";
 import { useTranslation } from "react-i18next";
 
-import "./components/css/custom.css";
 import "./components/css/site.css";
 
-import api_url from "./configurations/apiConfig.json";
+import API from "./configurations/apiConfig.json";
 
 import Login from "./routes/Login";
-import PageTemplate from "./routes/PageTemplate";
+import PageTemplate from "./PageTemplate";
+import Default from "./Default";
+import ErrorPage from "./routes/ErrorPage";
 
 initializeIcons(
   "https://static2.sharepointonline.com/files/fabric/assets/icons/"
@@ -39,7 +40,7 @@ const App = () => {
   });
 
   const login = async (credentials) => {
-    const data = await fetch(api_url.API_URL + "/authentication/login", {
+    const data = await fetch(API.BASE_URL + "/authentication/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +50,7 @@ const App = () => {
       .then((data) => data.json())
       .catch(() => setLoginError(t("ConnectionFailed")));
 
-    if (data || data["title"] !== "Unauthorized") {
+    if (data || (data && data["title"] !== "Unauthorized")) {
       setToken(data["token"]);
       setUser(data["user"]);
       window.localStorage.setItem("token", data["token"]);
@@ -60,7 +61,7 @@ const App = () => {
       setLoginError(t("Login_error"));
     }
 
-    navigate("/");
+    navigate("/send-sms");
   };
 
   const logout = async () => {
@@ -99,9 +100,11 @@ const App = () => {
 
     setToggleSidebar(!toggleSidebar);
   }
-
+  
   return (
     <Routes>
+      <Route path="/device" element={<Default />} />
+      <Route path="/error" element={<ErrorPage />} />
       <Route
         path="*"
         element={

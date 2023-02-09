@@ -1,10 +1,12 @@
 import { Icon } from "@fluentui/react";
 import { useTranslation } from "react-i18next";
 
-const Sidebar = ({ toggleSidebarText, appToken }) => {
+const ADMIN = "0";
+
+const Sidebar = ({ toggleSidebarText, user }) => {
   const { t } = useTranslation();
-  const role = appToken
-    ? appToken["user"].type
+  const role = user
+    ? user.type
     : window.localStorage.getItem("role");
 
   return (
@@ -30,7 +32,7 @@ const Sidebar = ({ toggleSidebarText, appToken }) => {
         <div className="sidebar-menu d-flex pt-4 pt-md-0 flex-column">
           <a
             href="/sms-service"
-            className="link-export d-flex flex-row justify-content-center mb-3 mx-3 py-2 text-decoration-none"
+            className="link-sms-service d-flex flex-row justify-content-center mb-3 mx-2 py-2 text-decoration-none"
             title={t("Sms_service")}
           >
             <div className="w-25 text-center">
@@ -40,7 +42,7 @@ const Sidebar = ({ toggleSidebarText, appToken }) => {
           </a>
           <a
             href="/number-management"
-            className="link-import d-flex flex-row justify-content-center mb-3 mx-3 py-2 text-decoration-none"
+            className="link-number-management d-flex flex-row justify-content-center mb-3 mx-2 py-2 text-decoration-none"
             title={t("Number_management")}
           >
             <div className="w-25 text-center">
@@ -52,7 +54,7 @@ const Sidebar = ({ toggleSidebarText, appToken }) => {
           </a>
           <a
             href="/message-generator"
-            className="link-import d-flex flex-row justify-content-center mb-3 mx-3 py-2 text-decoration-none"
+            className="link-message-generator d-flex flex-row justify-content-center mb-3 mx-2 py-2 text-decoration-none"
             title={t("Message_generator")}
           >
             <div className="w-25 text-center">
@@ -64,7 +66,7 @@ const Sidebar = ({ toggleSidebarText, appToken }) => {
           </a>
           <a
             href="/send-sms"
-            className="link-import d-flex flex-row justify-content-center mb-3 mx-3 py-2 text-decoration-none"
+            className="link-send-sms d-flex flex-row justify-content-center mb-3 mx-2 py-2 text-decoration-none"
             title={t("Sms_send")}
           >
             <div className="w-25 text-center">
@@ -76,11 +78,11 @@ const Sidebar = ({ toggleSidebarText, appToken }) => {
             className="mb-3 w-75 mx-auto"
             style={{ border: "1px solid rgba(255, 255, 255, 0.1)" }}
           ></div>
-          {role === "0" && (
+          {role === ADMIN && (
             <>
               <a
                 href="/user-management"
-                className="link-user-management d-flex flex-row justify-content-center mb-3 mx-3 py-2 text-decoration-none"
+                className="link-user-management d-flex flex-row justify-content-center mb-3 mx-2 py-2 text-decoration-none"
                 title={t("User_management")}
               >
                 <div className="w-25 text-center">
@@ -92,7 +94,7 @@ const Sidebar = ({ toggleSidebarText, appToken }) => {
               </a>
               <a
                 href="/brand-identity"
-                className="link-brand-identity d-flex flex-row justify-content-center mb-3 mx-3 py-2 text-decoration-none"
+                className="link-brand-identity d-flex flex-row justify-content-center mb-3 mx-2 py-2 text-decoration-none"
                 title={t("Brand_identity")}
               >
                 <div className="w-25 text-center">
