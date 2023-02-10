@@ -6,7 +6,7 @@ const Navbar = ({ logout, adminPanel }) => {
 
   return (
     <div
-      className="px-2 px-sm-4 d-flex justify-content-between border-bottom"
+      className="px-2 px-sm-4 d-flex justify-content-between border-bottom shadow"
       style={{ backgroundColor: "#fff" }}
     >
       <div>
