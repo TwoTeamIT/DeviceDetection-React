@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Spinner } from "@fluentui/react";
-import { Navigate, Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route, useNavigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -17,6 +17,7 @@ const ADMIN = "0";
 const READER = "1";
 
 const PageTemplate = ({ apiToken, apiUser, toggleSidebarText, logout }) => {
+  const navigate = useNavigate();
   const token = apiToken ? apiToken : window.localStorage.getItem("token");
   const expiration = window.localStorage.getItem("expiration");
   const userName = apiUser
@@ -26,6 +27,8 @@ const PageTemplate = ({ apiToken, apiUser, toggleSidebarText, logout }) => {
 
   useEffect(() => {
     if (new Date().toISOString() > expiration) window.localStorage.clear();
+
+    if (window.location.pathname === "/") navigate("/sms-service");
   });
 
   if (!token) return <Navigate replace to="/login" />;
