@@ -206,7 +206,6 @@ const BrandIdentity = ({ token }) => {
           };
           saveSettings(token, settings, setConnFailed).then((res) => {
             setFormState("unchanged");
-            console.log(res);
             if (res.success) {
               setMessageVariables(t("Success_save"), MessageBarType.success);
             } else setMessageVariables(t("Error_save"), MessageBarType.error);
