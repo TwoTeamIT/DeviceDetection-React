@@ -85,5 +85,6 @@
   "Phone_number_save_error_db": "Error while saving DB information for []",
   "Error_desktop": "Desktop device not supported",
   "Supported_device": "Supported smartphones and tablets only",
-  "Info_exists": "Information already entered"
+  "Info_exists": "Information already entered",
+  "Click_to_change": "Click to change"
 }

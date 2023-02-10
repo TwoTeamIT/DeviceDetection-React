@@ -1,5 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 const Image = ({ inputFileRef, image, imageSRC, setImageSRC }) => {
-  //const [imageSRC, setImageSRC] = useState(null);
+  const { t } = useTranslation();
 
   function setImage(input) {
     let reader = new FileReader();
@@ -22,6 +24,7 @@ const Image = ({ inputFileRef, image, imageSRC, setImageSRC }) => {
       />
       <div
         className="d-flex justify-content-center align-items-center shadow bg-custom"
+        title={t("Click_to_change")}
         style={{
           cursor: "pointer",
           width: "150px",

@@ -28,7 +28,7 @@ const PageTemplate = ({ apiToken, apiUser, toggleSidebarText, logout }) => {
   useEffect(() => {
     if (new Date().toISOString() > expiration) window.localStorage.clear();
 
-    if (window.location.pathname === "/") navigate("/sms-service");
+    if (window.location.pathname === "/") navigate("/send-sms");
   });
 
   if (!token) return <Navigate replace to="/login" />;

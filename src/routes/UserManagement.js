@@ -227,7 +227,7 @@ const UserManagement = ({ token }) => {
         />
                   */}
         <DefaultButton
-          className="btn-custom my-1"
+          className="btn-custom"
           text={t("Add_new_user")}
           iconProps={{ iconName: "Add" }}
           onClick={() => {

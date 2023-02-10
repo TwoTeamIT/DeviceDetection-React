@@ -1,3 +1,8 @@
+/* Body */
+body {
+  overflow-y: overlay;
+}
+
 /* Sidebar */
 .sidebar-menu a {
   position: relative;

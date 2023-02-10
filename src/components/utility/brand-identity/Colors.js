@@ -16,11 +16,13 @@ const Colors = ({
         <label>{t("Text_color")}</label>
         <div
           className="shadow mt-1"
+          title={t("Click_to_change")}
           style={{
             width: "50px",
             height: "30px",
             borderRadius: "10%",
             backgroundColor: textColor,
+            cursor: "pointer",
           }}
           onClick={(e) => {
             setColor(e.target.style.backgroundColor);
@@ -33,11 +35,13 @@ const Colors = ({
         <label>{t("Background_color")}</label>
         <div
           className="shadow mt-1"
+          title={t("Click_to_change")}
           style={{
             width: "50px",
             height: "30px",
             borderRadius: "10%",
             backgroundColor: bgColor,
+            cursor: "pointer",
           }}
           onClick={(e) => {
             setColor(e.target.style.backgroundColor);

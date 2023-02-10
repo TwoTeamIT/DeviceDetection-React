@@ -104,7 +104,7 @@ const MessageGenerator = ({ token }) => {
           });
         }}
       >
-        <div className="pt-2 d-flex flex-wrap align-items-start">
+        <div className="py-2 d-flex flex-wrap align-items-start">
           <DefaultButton
             className="btn-custom"
             text={t("Save")}
